@@ -1,0 +1,3 @@
+[submodule "site/qruqsp-mods/core"]
+	path = site/qruqsp-mods/core
+	url = git://github.com/qruqsp/core.git

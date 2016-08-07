@@ -1,7 +1,6 @@
 The MIT License
 
-Q - Ham Data Management Platform (http://qruqsp.org)
-Copyright (c) 2011, ciniki.org
+Copyright (c) 2016, qruqsp.org
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),

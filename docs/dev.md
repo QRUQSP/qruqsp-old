@@ -7,23 +7,12 @@ If you are interested in helping with the QRUQSP project, this document should h
 Installing
 ----------
 
-FIXME: Add installation instructions for development.
-
-Clone dev-tools helper scripts
-------------------------------
-
-The dev-tools repository contains scripts to aid in development. Checkout the README in the dev-tools for more information.
-
-```
-cd <qruqsp root directory>
-git clone git@github.com:qruqsp/dev-tools.git
-```
-
-
-
+- [Installing on a mac](mac-install.md)
+- FIXME: Add documentation for docker setup
 
 Other Documents
 ---------------
 
 - [Directory Layout](directories.md)
+- [Submodules & Management](modules.md)
 

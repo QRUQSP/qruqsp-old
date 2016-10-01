@@ -7,7 +7,7 @@ If you are interested in helping with the QRUQSP project, this document should h
 Installing
 ----------
 
-- [Installing on a mac](mac-install.md)
+- [Installing on a mac](dev-install-mac.md)
 - FIXME: Add documentation for docker setup
 
 Other Documents

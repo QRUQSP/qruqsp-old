@@ -1,5 +1,5 @@
-Mac Development Install
-=======================
+Development Install for Mac
+===========================
 
 Packages required
 -----------------

@@ -4,3 +4,6 @@
 [submodule "site/qruqsp-mods/images"]
 	path = site/qruqsp-mods/images
 	url = git://github.com/qruqsp/images.git
+[submodule "site/qruqsp-mods/bugs"]
+	path = site/qruqsp-mods/bugs
+	url = https://github.com/qruqsp/bugs.git

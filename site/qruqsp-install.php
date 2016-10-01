@@ -1645,10 +1645,8 @@ table.list td div.calendar {
                                 <td class="input"><input type="text" id="admin_username" name="admin_username" /></td></tr>
                             <tr class="textfield"><td class="label"><label for="admin_password">Password</label></td>
                                 <td class="input"><input type="password" id="admin_password" name="admin_password" /></td></tr>
-                            <tr class="textfield"><td class="label"><label for="admin_firstname">First</label></td>
-                                <td class="input"><input type="text" id="admin_firstname" name="admin_firstname" /></td></tr>
-                            <tr class="textfield"><td class="label"><label for="admin_lastname">Last</label></td>
-                                <td class="input"><input type="text" id="admin_lastname" name="admin_lastname" /></td></tr>
+                            <tr class="textfield"><td class="label"><label for="admin_callsign">Callsign</label></td>
+                                <td class="input"><input type="text" id="admin_callsign" name="admin_callsign" /></td></tr>
                             <tr class="textfield"><td class="label"><label for="admin_display_name">Display</label></td>
                                 <td class="input"><input type="text" id="admin_display_name" name="admin_display_name" placeholder=""/></td></tr>
                             </tbody>
@@ -1706,8 +1704,7 @@ function install($qruqsp_root, $modules_dir) {
     $admin_email = $_POST['admin_email'];
     $admin_username = $_POST['admin_username'];
     $admin_password = $_POST['admin_password'];
-    $admin_firstname = $_POST['admin_firstname'];
-    $admin_lastname = $_POST['admin_lastname'];
+    $admin_callsign = $_POST['admin_callsign'];
     $admin_display_name = $_POST['admin_display_name'];
     $master_name = $_POST['master_name'];
     $system_email = $_POST['system_email'];
@@ -1740,7 +1737,7 @@ function install($qruqsp_root, $modules_dir) {
     $config['qruqsp.core']["database.$database_name.database"] = $database_name;
 
     // The master business ID will be set later on, once information is in database
-    $config['qruqsp.core']['master_business_id'] = 0;
+    $config['qruqsp.core']['master_station_id'] = 0;
 
     $config['qruqsp.core']['alerts.notify'] = $admin_email;
     $config['qruqsp.core']['system.email'] = $system_email;
@@ -1850,7 +1847,7 @@ function install($qruqsp_root, $modules_dir) {
     qruqsp_core_loadMethod($qruqsp, 'qruqsp', 'core', 'private', 'dbInit');
     $rc = qruqsp_core_dbInit($qruqsp);
     if( $rc['stat'] != 'ok' ) {
-        print_page('yes', 'qruqsp.' . $rc['err']['code'], "Failed to connect to the database '$database_name', please check your database connection settings and try again.<br/><br/>" . $rc['err']['msg']);
+        print_page('yes', $rc['err']['code'], "Failed to connect to the database '$database_name', please check your database connection settings and try again.<br/><br/>" . $rc['err']['msg']);
         exit();
     }
 
@@ -1861,7 +1858,7 @@ function install($qruqsp_root, $modules_dir) {
     qruqsp_core_loadMethod($qruqsp, 'qruqsp', 'core', 'private', 'dbUpgradeTables');
     $rc = qruqsp_core_dbUpgradeTables($qruqsp);
     if( $rc['stat'] != 'ok' ) {
-        print_page('yes', 'qruqsp.' . $rc['err']['code'], "Failed to connect to the database '$database_name', please check your database connection settings and try again.<br/><br/>" . $rc['err']['msg']);
+        print_page('yes', $rc['err']['code'], "Failed to connect to the database '$database_name', please check your database connection settings and try again.<br/><br/>" . $rc['err']['msg']);
         exit();
     }
 
@@ -1875,7 +1872,7 @@ function install($qruqsp_root, $modules_dir) {
     qruqsp_core_loadMethod($qruqsp, 'qruqsp', 'core', 'private', 'dbCount');
     $rc = qruqsp_core_dbCount($qruqsp, $strsql, 'core', 'count');
     if( $rc['stat'] != 'ok' ) {
-        print_page('yes', 'qruqsp.' . $rc['err']['code'], "Failed to check for existing data<br/><br/>" . $rc['err']['msg']);
+        print_page('yes', $rc['err']['code'], "Failed to check for existing data<br/><br/>" . $rc['err']['msg']);
         exit();
     }
     if( $rc['count']['num_rows'] != 0 ) {
@@ -1903,7 +1900,7 @@ function install($qruqsp_root, $modules_dir) {
     qruqsp_core_loadMethod($qruqsp, 'qruqsp', 'core', 'private', 'dbInsert');
     $rc = qruqsp_core_dbTransactionStart($qruqsp, 'core');
     if( $rc['stat'] != 'ok' ) {
-        print_page('yes', 'qruqsp.' . $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
+        print_page('yes', $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
         exit();
     }
 
@@ -1911,14 +1908,14 @@ function install($qruqsp_root, $modules_dir) {
         //
         // Add the user
         //
-        $strsql = "INSERT INTO qruqsp_core_users (id, uuid, email, username, password, avatar_id, perms, status, timeout, "
-            . "firstname, lastname, display_name, date_added, last_updated) VALUES ( "
-            . "'1', UUID(), '$admin_email', '$admin_username', SHA1('$admin_password'), 0, 1, 1, 0, "
-            . "'$admin_firstname', '$admin_lastname', '$admin_display_name', UTC_TIMESTAMP(), UTC_TIMESTAMP())";
+        $strsql = "INSERT INTO qruqsp_core_users (id, uuid, email, username, password, callsign, avatar_id, perms, status, timeout, "
+            . "display_name, date_added, last_updated) VALUES ( "
+            . "'1', UUID(), '$admin_email', '$admin_username', SHA1('$admin_password'), '$admin_callsign', 0, 1, 1, 0, "
+            . "'$admin_display_name', UTC_TIMESTAMP(), UTC_TIMESTAMP())";
         $rc = qruqsp_core_dbInsert($qruqsp, $strsql, 'users');
         if( $rc['stat'] != 'ok' ) {
             qruqsp_core_dbTransactionRollback($qruqsp, 'core');
-            print_page('yes', 'qruqsp.' . $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
+            print_page('yes', $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
             exit();
         }
 
@@ -1930,10 +1927,10 @@ function install($qruqsp_root, $modules_dir) {
         $rc = qruqsp_core_dbInsert($qruqsp, $strsql, 'businesses');
         if( $rc['stat'] != 'ok' ) {
             qruqsp_core_dbTransactionRollback($qruqsp, 'core');
-            print_page('yes', 'qruqsp.' . $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
+            print_page('yes', $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
             exit();
         }
-        $config['qruqsp.core']['master_business_id'] = 1;
+        $config['qruqsp.core']['master_station_id'] = 1;
         $config['qruqsp.web']['master.domain'] = $_SERVER['HTTP_HOST'];
         $config['qruqsp.web']['poweredby.url'] = "http://qruqsp.com/";
         $config['qruqsp.web']['poweredby.name'] = "QRUQSP";
@@ -1943,58 +1940,49 @@ function install($qruqsp_root, $modules_dir) {
         //
         // Add sysadmin as the owner of the master business
         //
-        $strsql = "INSERT INTO qruqsp_core_station_users (uuid, business_id, user_id, package, permission_group, status, date_added, last_updated) VALUES ("
-            . "UUID(), '1', '1', 'qruqsp', 'owners', '1', UTC_TIMESTAMP(), UTC_TIMESTAMP())";
+        $strsql = "INSERT INTO qruqsp_core_station_users (uuid, station_id, user_id, permission_group, status, date_added, last_updated) VALUES ("
+            . "UUID(), '1', '1', 'owners', '1', UTC_TIMESTAMP(), UTC_TIMESTAMP())";
         $rc = qruqsp_core_dbInsert($qruqsp, $strsql, 'businesses');
         if( $rc['stat'] != 'ok' ) {
             qruqsp_core_dbTransactionRollback($qruqsp, 'core');
-            print_page('yes', 'qruqsp.' . $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
+            print_page('yes', $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
             exit();
         }
 
         //
         // Enable modules: bugs, questions for master business
         //
-        $strsql = "INSERT INTO qruqsp_core_station_modules (business_id, package, module, status, ruleset, date_added, last_updated) "
-            . "VALUES ('1', 'qruqsp', 'bugs', 1, 'all_customers', UTC_TIMESTAMP(), UTC_TIMESTAMP())";
+        $strsql = "INSERT INTO qruqsp_core_station_modules (station_id, package, module, status, date_added, last_updated) "
+            . "VALUES ('1', 'qruqsp', 'bugs', 1, UTC_TIMESTAMP(), UTC_TIMESTAMP())";
         $rc = qruqsp_core_dbInsert($qruqsp, $strsql, 'businesses');
         if( $rc['stat'] != 'ok' ) {
             qruqsp_core_dbTransactionRollback($qruqsp, 'core');
-            print_page('yes', 'qruqsp.' . $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
+            print_page('yes', $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
             exit();
         }
 
         //
         // Setup notification settings
         //
-        $strsql = "INSERT INTO qruqsp_bug_settings (business_id, detail_key, detail_value, date_added, last_updated) "
+        $strsql = "INSERT INTO qruqsp_bug_settings (station_id, detail_key, detail_value, date_added, last_updated) "
             . "VALUES ('1', 'add.notify.owners', 'yes', UTC_TIMESTAMP(), UTC_TIMESTAMP())";
         $rc = qruqsp_core_dbInsert($qruqsp, $strsql, 'bugs');
         if( $rc['stat'] != 'ok' ) {
             qruqsp_core_dbTransactionRollback($qruqsp, 'core');
-            print_page('yes', 'qruqsp.' . $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
+            print_page('yes', $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
             exit();
         }
-
-//      $strsql = "INSERT INTO qruqsp_question_settings (business_id, detail_key, detail_value, date_added, last_updated) "
-//          . "VALUES ('1', 'add.notify.owners', 'yes', UTC_TIMESTAMP(), UTC_TIMESTAMP())";
-//      $rc = qruqsp_core_dbInsert($qruqsp, $strsql, 'questions');
-//      if( $rc['stat'] != 'ok' ) {
-//          qruqsp_core_dbTransactionRollback($qruqsp, 'core');
-//          print_page('yes', 'qruqsp.' . $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
-//          exit();
-//      }
 
         //
         // Add the api key for the UI
         //
-        $strsql = "INSERT INTO qruqsp_core_api_keys (api_key, status, perms, user_id, appname, notes, "
+        $strsql = "INSERT INTO qruqsp_core_api_keys (api_key, status, appname, notes, "
             . "last_access, expiry_date, date_added, last_updated) VALUES ("
-            . "'$manage_api_key', 1, 0, 2, 'qruqsp-manage', '', 0, 0, UTC_TIMESTAMP(), UTC_TIMESTAMP())";
+            . "'$manage_api_key', 1, 'qruqsp-manage', '', 0, 0, UTC_TIMESTAMP(), UTC_TIMESTAMP())";
         $rc = qruqsp_core_dbInsert($qruqsp, $strsql, 'core');
         if( $rc['stat'] != 'ok' ) {
             qruqsp_core_dbTransactionRollback($qruqsp, 'core');
-            print_page('yes', 'qruqsp.' . $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
+            print_page('yes', $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
             exit();
         }
     }
@@ -2125,7 +2113,7 @@ function install($qruqsp_root, $modules_dir) {
         unlink($qruqsp_root . '/qruqsp-manage.php');        
         unlink($qruqsp_root . '/qruqsp-login.php');     
         unlink($qruqsp_root . '/index.php');        
-        print_page('yes', 'qruqsp.' . $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
+        print_page('yes', $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
         exit();
     }
 

@@ -6,11 +6,21 @@ Packages required
 
 Macports will need to be installed in order to setup MySQL, Apache and PHP. You can install from http://www.macports.org/
 
-Once installed the following ports should be installed
+If you already have ports installed, run the selfupdate to get the latest ports list.
 ```
-sudo port install apache2
+sudo port selfupdate
+```
+
+Install the MySQL server
+```
 sudo port install mysql56
 sudo port install mysql56-server
+sudo -u _mysql /opt/local/lib/mysql56/bin/mysql_install_db
+```
+
+Install apache and php
+```
+sudo port install apache2
 sudo port install php56
 sudo port install php56-apache2handler
 sudo port install php56-curl
@@ -30,7 +40,7 @@ You'll need your ssh keys installed at github so you can push changes back to th
 It is recommended to create a working directory for the project that can contain extra files, downloads etc and the git repo is a subdirectory.
 
 ```
-~/projects/qruqsp
+mkdir -p ~/projects/qruqsp
 ```
 
 Clone the qruqsp repo
@@ -72,8 +82,13 @@ Edit your /etc/hosts file and add the line
 
 Apache
 ------
-The following virtual host definition should be added to the file /opt/local/apache2/conf/extra/httpd-vhosts.conf and modify for your
-file system.
+Create the log directory for apache logs.
+```
+cd ~projects/qruqsp/qruqsp.local
+mkdir logs
+```
+
+Edit /opt/local/apache2/conf/extra/httpd-vhosts.conf to add the virtual host definition.
 
 ```
 <VirtualHost *:80>
@@ -104,6 +119,8 @@ If everything is ok, restart apache with the new configuration
 Configure QRUQSP
 ----------------
 Run the qruqsp-install from the website http://qruqsp.local/qruqsp-installer.php
+
+Once this has been run, you'll need to edit the qruqsp-api.ini file to remove the need for SSL.
 
 
 Install QRUQSP/dev-tools

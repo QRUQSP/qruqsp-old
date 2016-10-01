@@ -123,9 +123,9 @@ Run the qruqsp-install from the website http://qruqsp.local/qruqsp-install.php
 Once this has been run, you'll need to edit the qruqsp-api.ini file to remove the need for SSL.
 ```
 [core]
-    ...
+    ...snip...
     ssl = "off"
-    ...
+    ...snip...
 ```
 
 
@@ -141,5 +141,9 @@ git clone https://github.com/qruqsp/dev-tools.git
 Copy the run.ini.default to run.ini and configure with your local settings. This will allow you to 
 execute ./run.php and see the history of API calls and repeat any calls you want, useful for testing the API.
 
+```
+cd ~/projects/qruqsp/qruqsp.local
+cp run.ini.default run.ini
+```
 
 

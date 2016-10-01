@@ -108,19 +108,25 @@ Edit /opt/local/apache2/conf/extra/httpd-vhosts.conf to add the virtual host def
 
 Test the new configuration to make sure the webserver will restart
 ```
-/opt/local/apache2/bin/apachectl configtest
+sudo /opt/local/apache2/bin/apachectl configtest
 ```
 
 If everything is ok, restart apache with the new configuration
 ```
-/opt/local/apache2/bin/apachectl restart
+sudo /opt/local/apache2/bin/apachectl restart
 ```
 
 Configure QRUQSP
 ----------------
-Run the qruqsp-install from the website http://qruqsp.local/qruqsp-installer.php
+Run the qruqsp-install from the website http://qruqsp.local/qruqsp-install.php
 
 Once this has been run, you'll need to edit the qruqsp-api.ini file to remove the need for SSL.
+```
+[core]
+    ...
+    ssl = "off"
+    ...
+```
 
 
 Install QRUQSP/dev-tools

@@ -120,14 +120,13 @@ Configure QRUQSP
 ----------------
 Run the qruqsp-install from the website http://qruqsp.local/qruqsp-install.php
 
-Once this has been run, you'll need to edit the qruqsp-api.ini file to remove the need for SSL.
+If you don't want to setup SSL on your dev machine, turn off SSL in the qruqsp-api.ini file.
 ```
-[core]
+[qruqsp.core]
     ...snip...
     ssl = "off"
     ...snip...
 ```
-
 
 Install QRUQSP/dev-tools
 ------------------------

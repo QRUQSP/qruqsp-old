@@ -38,9 +38,10 @@ to github.com is added using git remote add push.
 
 ```
 cd ~/projects/qruqsp/qruqsp.local
-git submodule add https://github.com/qruqsp/submodule.git site/qruqsp-mods/submodule
-cd site/qruqsp-mods/submodule
+# hey you with the keyboard replace "<submodule_name>" with the submodule you need
+git submodule add https://github.com/qruqsp/<submodule_name>.git site/qruqsp-mods/<submodule_name>
+cd site/qruqsp-mods/<submodule_name>
 git checkout master
-git remote add push git@github.com:qruqsp/submodule.git
+git remote add push git@github.com:qruqsp/<submodule_name>.git
 ```
 

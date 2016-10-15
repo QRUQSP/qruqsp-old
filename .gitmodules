@@ -7,3 +7,6 @@
 [submodule "site/qruqsp-mods/bugs"]
 	path = site/qruqsp-mods/bugs
 	url = https://github.com/qruqsp/bugs.git
+[submodule "site/qruqsp-mods/admin"]
+	path = site/qruqsp-mods/admin
+	url = https://github.com/qruqsp/admin.git

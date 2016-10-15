@@ -45,3 +45,8 @@ git checkout master
 git remote add push git@github.com:qruqsp/<submodule_name>.git
 ```
 
+Initialize the new submodule.
+```
+rm README.md
+../../../dev-tools/mod_init.php qruqsp <submodule_name> <submodule_title> 1
+```

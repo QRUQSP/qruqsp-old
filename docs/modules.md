@@ -50,3 +50,8 @@ Initialize the new submodule.
 rm README.md
 ../../../dev-tools/mod_init.php qruqsp <submodule_name> <submodule_title> 1
 ```
+
+Create the database files
+
+
+Create the objects file

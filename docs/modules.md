@@ -45,13 +45,67 @@ git checkout master
 git remote add github git@github.com:qruqsp/<submodule_name>.git
 ```
 
-Initialize the new submodule.
+### Initialize the new submodule.
+
+Once the submodule has been added, it needs to be initialized with required files.
+
 ```
 rm README.md
 ../../../dev-tools/mod_init.php <submodule_title>
 ```
 
-Create the database files
+The following files will be added:
+
+#### README.md
+
+The README.md will need to be edited to add the description of the module. This contains the basic
+description of the module and a link to the license file.
+
+#### LICENSE.md
+
+This is the MIT license for the module.
+
+#### _info.ini
+
+The configuration file used by core to display the list of modules in the admin UI. 
+If the public field is yes, it's available 
 
 
-Create the objects file
+
+### Create the database files
+
+```
+#
+# Description
+# -----------
+#
+#
+# Fields
+# ------
+# id:                       The ID assigned to the item.
+# uuid:                     The Universal Unique ID.
+# business_id:              The station the item is attached to.
+#
+# date_added:               The UTC date and time the record was added.
+# last_updated:             The UTC date and time the record was last updated.
+#
+create table qruqsp_module_items (
+    id int not null auto_increment,
+    uuid char(36) not null,
+    station_id int not null,
+
+    date_added datetime not null,
+    last_updated datetime not null,
+    primary key (id),
+    unique index (uuid),
+    index sync (business_id, uuid, last_updated)
+) ENGINE='InnoDB', COMMENT='v1.01';
+```
+
+### Create the objects file
+
+Initialize the object
+
+```
+../../../dev-tools/mod_init_object.php 
+```

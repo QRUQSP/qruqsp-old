@@ -74,11 +74,38 @@ If the public field is yes, it's available
 
 ### Create the database files
 
+```
+#
+# Description
+# -----------
+#
+#
+# Fields
+# ------
+# id:                       The ID assigned to the item.
+# uuid:                     The Universal Unique ID.
+# business_id:              The station the item is attached to.
+#
+# date_added:               The UTC date and time the record was added.
+# last_updated:             The UTC date and time the record was last updated.
+#
+create table qruqsp_module_items (
+    id int not null auto_increment,
+    uuid char(36) not null,
+    station_id int not null,
+
+    date_added datetime not null,
+    last_updated datetime not null,
+    primary key (id),
+    unique index (uuid),
+    index sync (business_id, uuid, last_updated)
+) ENGINE='InnoDB', COMMENT='v1.01';
+```
 
 ### Create the objects file
 
 Initialize the object
 
 ```
-
+../../../dev-tools/mod_init_object.php 
 ```

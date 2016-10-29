@@ -10,3 +10,6 @@
 [submodule "site/qruqsp-mods/admin"]
 	path = site/qruqsp-mods/admin
 	url = https://github.com/qruqsp/admin.git
+[submodule "site/qruqsp-mods/qsl"]
+	path = site/qruqsp-mods/qsl
+	url = https://github.com/qruqsp/qsl.git

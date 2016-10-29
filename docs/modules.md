@@ -45,13 +45,40 @@ git checkout master
 git remote add github git@github.com:qruqsp/<submodule_name>.git
 ```
 
-Initialize the new submodule.
+### Initialize the new submodule.
+
+Once the submodule has been added, it needs to be initialized with required files.
+
 ```
 rm README.md
 ../../../dev-tools/mod_init.php <submodule_title>
 ```
 
-Create the database files
+The following files will be added:
+
+#### README.md
+
+The README.md will need to be edited to add the description of the module. This contains the basic
+description of the module and a link to the license file.
+
+#### LICENSE.md
+
+This is the MIT license for the module.
+
+#### _info.ini
+
+The configuration file used by core to display the list of modules in the admin UI. 
+If the public field is yes, it's available 
 
 
-Create the objects file
+
+### Create the database files
+
+
+### Create the objects file
+
+Initialize the object
+
+```
+
+```

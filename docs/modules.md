@@ -42,11 +42,16 @@ cd ~/projects/qruqsp/qruqsp.local
 git submodule add https://github.com/qruqsp/<submodule_name>.git site/qruqsp-mods/<submodule_name>
 cd site/qruqsp-mods/<submodule_name>
 git checkout master
-git remote add push git@github.com:qruqsp/<submodule_name>.git
+git remote add github git@github.com:qruqsp/<submodule_name>.git
 ```
 
 Initialize the new submodule.
 ```
 rm README.md
-../../../dev-tools/mod_init.php qruqsp <submodule_name> <submodule_title> 1
+../../../dev-tools/mod_init.php <submodule_title>
 ```
+
+Create the database files
+
+
+Create the objects file

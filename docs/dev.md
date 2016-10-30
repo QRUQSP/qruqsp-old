@@ -15,4 +15,5 @@ Other Documents
 
 - [Directory Layout](directories.md)
 - [Submodules & Management](modules.md)
+- [Module Objects](objects.md)
 

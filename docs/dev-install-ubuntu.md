@@ -115,6 +115,12 @@ cd /etc/apache2/sites-enabled
 ln -s ../sites-available/qruqsp.local.conf
 ```
 
+Link the rewrite module
+```
+cd /etc/apache2/mods-enables
+ln -s ../mods-available/rewrite.load
+```
+
 Test the new configuration to make sure the webserver will restart
 ```
 sudo /usr/sbin/apache2ctl configtest

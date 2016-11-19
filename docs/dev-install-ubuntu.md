@@ -62,7 +62,7 @@ Setup the website and clone the repo.
 ```
 mkdir /qruqsp/sites
 cd /qruqsp/sites
-git clone git@github.com:qruqsp/qruqsp qruqsp.local
+git clone https@github.com:qruqsp/qruqsp qruqsp.local
 ```
 
 Update the submodules for the project to make sure you have the latest code

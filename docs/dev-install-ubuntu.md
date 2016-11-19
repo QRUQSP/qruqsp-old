@@ -21,6 +21,12 @@ The lines should be added at the end of the file after the includes of other con
 [mysqld]
 sql_mode = ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
 ```
+Setup a .my.cnf in your home directory with the following content. This saves having to type the user and password for each mysql command.
+```
+[client]
+user=root
+password=
+```
 
 Create the database
 ```

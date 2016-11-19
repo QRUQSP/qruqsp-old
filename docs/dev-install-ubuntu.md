@@ -104,6 +104,8 @@ Edit the file /etc/apache2/sites-available/qruqsp.local.conf
         AllowOverride All
         Require all granted
     </Directory>
+    ErrorLog /qruqsp/sites/qruqsp.local/logs/error.log
+    CustomLog /qruqsp/sites/qruqsp.local/logs/access.log combined
 </VirtualHost>
 ```
 

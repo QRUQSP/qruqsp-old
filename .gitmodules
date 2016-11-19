@@ -1,9 +1,9 @@
 [submodule "site/qruqsp-mods/core"]
 	path = site/qruqsp-mods/core
-	url = git://github.com/qruqsp/core.git
+	url = https://github.com/qruqsp/core.git
 [submodule "site/qruqsp-mods/images"]
 	path = site/qruqsp-mods/images
-	url = git://github.com/qruqsp/images.git
+	url = https://github.com/qruqsp/images.git
 [submodule "site/qruqsp-mods/bugs"]
 	path = site/qruqsp-mods/bugs
 	url = https://github.com/qruqsp/bugs.git

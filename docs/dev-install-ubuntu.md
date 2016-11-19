@@ -68,7 +68,7 @@ git submodule update --init
 The following directory permissions need to be changed so the webserver has access to them. Once the configuration is run further down then
 the permissions can be changed back.
 ```
-cd ~/projects/qruqsp/qruqsp.local
+cd /qruqsp/sites/qruqsp.local
 chmod a+w site
 chmod a+w site/qruqsp-mods/web/cache
 ```
@@ -87,13 +87,13 @@ Edit the file /etc/apache2/sites-available/qruqsp.local.conf
     ServerAdmin emailaddress@myserver.com
     ServerName qruqsp.local
 
-    DocumentRoot /qruqsp/sites/qruqsp/site
+    DocumentRoot /qruqsp/sites/qruqsp.local/site
     <Directory />
         Options FollowSymLinks
         AllowOverride None
         Require all granted
     </Directory>
-    <Directory /ciniki/sites/dfw.ciniki.ca/site/>
+    <Directory /qruqsp/sites/qruqsp.local/site/>
         Options Indexes FollowSymLinks MultiViews
         AllowOverride All
         Require all granted
@@ -142,7 +142,7 @@ Copy the run.ini.default to run.ini and configure with your local settings. This
 execute ./run.php and see the history of API calls and repeat any calls you want, useful for testing the API.
 
 ```
-cd ~/projects/qruqsp/qruqsp.local
+cd /qruqsp/sites/qruqsp.local
 cp run.ini.default run.ini
 ```
 

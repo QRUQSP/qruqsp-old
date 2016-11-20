@@ -2068,7 +2068,7 @@ function install($qruqsp_root, $modules_dir) {
         . "RewriteRule ^(qruqsp-web-themes/.*)$ $1 [L]                                              # Allow manage-theme content\n"
         . "RewriteRule ^(qruqsp-mods/web/layouts/.*)$ $1 [L]                                    # Allow web-layouts content\n"
         . "RewriteRule ^(qruqsp-mods/web/themes/.*)$ $1 [L]                                     # Allow web-themes content\n"
-        . "RewriteRule ^(qruqsp-mods/web/cache/.*\.(json|jpg|png|mp3|ogg|wav))$ $1 [L]                                      # Allow web-cache content\n"
+        . "RewriteRule ^(qruqsp-mods/web/cache/.*\.(css|js|gif|jpg|png|mp3|ogg|wav))$ $1 [L]                                      # Allow web-cache content\n"
         . "RewriteRule ^(qruqsp-login|qruqsp-sync|qruqsp-json|index|qruqsp-manage).php$ $1.php [L]  # allow entrance php files\n"
         . "RewriteRule ^([_0-9a-zA-Z-]+/)(.*\.php)$ index.php [L]                                  # Redirect all other php requests to index\n"
         . "RewriteRule ^$ index.php [L]                                                              # Redirect all other requests to index\n"

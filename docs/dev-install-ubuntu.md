@@ -21,6 +21,12 @@ The lines should be added at the end of the file after the includes of other con
 [mysqld]
 sql_mode = ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
 ```
+Setup a .my.cnf in your home directory with the following content. This saves having to type the user and password for each mysql command.
+```
+[client]
+user=root
+password=
+```
 
 Create the database
 ```
@@ -56,7 +62,7 @@ Setup the website and clone the repo.
 ```
 mkdir /qruqsp/sites
 cd /qruqsp/sites
-git clone git@github.com:qruqsp/qruqsp qruqsp.local
+git clone https@github.com:qruqsp/qruqsp qruqsp.local
 ```
 
 Update the submodules for the project to make sure you have the latest code
@@ -68,7 +74,7 @@ git submodule update --init
 The following directory permissions need to be changed so the webserver has access to them. Once the configuration is run further down then
 the permissions can be changed back.
 ```
-cd ~/projects/qruqsp/qruqsp.local
+cd /qruqsp/sites/qruqsp.local
 chmod a+w site
 chmod a+w site/qruqsp-mods/web/cache
 ```
@@ -87,17 +93,19 @@ Edit the file /etc/apache2/sites-available/qruqsp.local.conf
     ServerAdmin emailaddress@myserver.com
     ServerName qruqsp.local
 
-    DocumentRoot /qruqsp/sites/qruqsp/site
+    DocumentRoot /qruqsp/sites/qruqsp.local/site
     <Directory />
         Options FollowSymLinks
         AllowOverride None
         Require all granted
     </Directory>
-    <Directory /ciniki/sites/dfw.ciniki.ca/site/>
+    <Directory /qruqsp/sites/qruqsp.local/site/>
         Options Indexes FollowSymLinks MultiViews
         AllowOverride All
         Require all granted
     </Directory>
+    ErrorLog /qruqsp/sites/qruqsp.local/logs/error.log
+    CustomLog /qruqsp/sites/qruqsp.local/logs/access.log combined
 </VirtualHost>
 ```
 
@@ -105,6 +113,12 @@ Link the file into sites-enabled
 ```
 cd /etc/apache2/sites-enabled
 ln -s ../sites-available/qruqsp.local.conf
+```
+
+Link the rewrite module
+```
+cd /etc/apache2/mods-enables
+ln -s ../mods-available/rewrite.load
 ```
 
 Test the new configuration to make sure the webserver will restart
@@ -142,7 +156,7 @@ Copy the run.ini.default to run.ini and configure with your local settings. This
 execute ./run.php and see the history of API calls and repeat any calls you want, useful for testing the API.
 
 ```
-cd ~/projects/qruqsp/qruqsp.local
+cd /qruqsp/sites/qruqsp.local
 cp run.ini.default run.ini
 ```
 

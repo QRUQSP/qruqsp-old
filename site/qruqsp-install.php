@@ -1910,7 +1910,7 @@ function install($qruqsp_root, $modules_dir) {
         //
         $strsql = "INSERT INTO qruqsp_core_users (id, uuid, email, username, password, callsign, avatar_id, perms, status, timeout, "
             . "display_name, date_added, last_updated) VALUES ( "
-            . "'1', UUID(), '$admin_email', '$admin_username', SHA1('$admin_password'), '$admin_callsign', 0, 1, 1, 0, "
+            . "'1', UUID(), '$admin_email', '$admin_username', SHA1('$admin_password'), '$admin_callsign', 0, 1, 10, 0, "
             . "'$admin_display_name', UTC_TIMESTAMP(), UTC_TIMESTAMP())";
         $rc = qruqsp_core_dbInsert($qruqsp, $strsql, 'users');
         if( $rc['stat'] != 'ok' ) {

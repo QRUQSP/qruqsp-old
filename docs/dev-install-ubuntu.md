@@ -35,17 +35,7 @@ mysqladmin create qruqsp
 
 Install apache and php
 ```
-sudo apt-get -y install apache2
-sudo apt-get -y install php
-sudo apt-get -y install php-imagick
-sudo apt-get -y install php-intl
-sudo apt-get -y install php-curl
-sudo apt-get -y install php-mysql
-sudo apt-get -y install php-json
-sudo apt-get -y install php-readline
-sudo apt-get -y install php-imap
-sudo apt-get -y install php7.0-bcmath
-sudo apt-get -y install libapache2-mod-php7.0
+sudo apt-get -y install apache2 php php-imagick php-intl php-curl php-mysql php-json php-readline php-imap php7.0-bcmath libapache2-mod-php7.0
 ```
 
 Hosts file
@@ -62,7 +52,7 @@ Setup the website and clone the repo.
 ```
 mkdir /qruqsp/sites
 cd /qruqsp/sites
-git clone https@github.com:qruqsp/qruqsp qruqsp.local
+git clone https://github.com/qruqsp/qruqsp qruqsp.local
 ```
 
 Update the submodules for the project to make sure you have the latest code

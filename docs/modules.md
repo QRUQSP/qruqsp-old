@@ -130,9 +130,6 @@ to github.com is added using git remote add push.
 cd ~/projects/qruqsp/qruqsp.local
 # hey you with the keyboard replace "<submodule_name>" with the submodule you need
 git submodule add https://github.com/qruqsp/<submodule_name>.git site/qruqsp-mods/<submodule_name>
-cd site/qruqsp-mods/<submodule_name>
-git checkout master
-git remote add github git@github.com:qruqsp/<submodule_name>.git
 ```
 
 ### Initialize the new submodule

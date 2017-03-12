@@ -1627,13 +1627,13 @@ table.list td div.calendar {
                         <table class="list noheader form outline" cellspacing='0' cellpadding='0'>
                             <tbody>
                             <tr class="textfield"><td class="label"><label for="database_host">Host</label></td>
-                                <td class="input"><input id="database_host" name="database_host" type="text"/></td></tr>
+                                <td class="input"><input id="database_host" name="database_host" type="text" value="localhost"/></td></tr>
                             <tr class="textfield"><td class="label"><label for="database_username">User</label></td>
-                                <td class="input"><input type="text" id="database_username" name="database_username" /></td></tr>
+                                <td class="input"><input type="text" id="database_username" name="database_username" value="root"/></td></tr>
                             <tr class="textfield"><td class="label"><label for="database_password">Password</label></td>
-                                <td class="input"><input type="password" id="database_password" name="database_password" /></td></tr>
+                                <td class="input"><input type="password" id="database_password" name="database_password" value=""/></td></tr>
                             <tr class="textfield"><td class="label"><label for="database_name">Name</label></td>
-                                <td class="input"><input type="text" id="database_name" name="database_name" /></td></tr>
+                                <td class="input"><input type="text" id="database_name" name="database_name" value="qruqsp" /></td></tr>
                             </tbody>
                         </table>
                         <h2>System Adminstrator</h2>
@@ -1669,7 +1669,7 @@ table.list td div.calendar {
                         <table class="list noheader form outline" cellspacing='0' cellpadding='0'>
                             <tbody>
                             <tr class="textfield"><td class="label"><label for="sync_code_url">Code URL</label></td>
-                                <td class="input"><input type="text" id="sync_code_url" name="sync_code_url" value="http://qruqsp.com/qruqsp-code" /></td></tr>
+                                <td class="input"><input type="text" id="sync_code_url" name="sync_code_url" futurevalue="http://qruqsp.com/qruqsp-code" /></td></tr>
                             </tbody>
                         </table>
                         </div>
@@ -1756,6 +1756,7 @@ function install($qruqsp_root, $modules_dir) {
     $config['qruqsp.core']['sync.log_dir'] = dirname($qruqsp_root) . "/logs";
     $config['qruqsp.core']['sync.lock_dir'] = dirname($qruqsp_root) . "/logs";
     $config['qruqsp.core']['manage.url'] = "https://" . $_SERVER['SERVER_NAME'] . "/" . preg_replace('/^\//', '', dirname($_SERVER['REQUEST_URI']) . "manager");
+    $config['qruqsp.core']['ssl'] = '"off"';
 
     // Configure users module settings for password recovery
     $config['qruqsp.users']['password.forgot.notify'] = $admin_email;
@@ -1952,8 +1953,20 @@ function install($qruqsp_root, $modules_dir) {
         //
         // Enable modules: bugs, questions for master business
         //
-        $strsql = "INSERT INTO qruqsp_core_station_modules (station_id, package, module, status, date_added, last_updated) "
+/*        $strsql = "INSERT INTO qruqsp_core_station_modules (station_id, package, module, status, date_added, last_updated) "
             . "VALUES ('1', 'qruqsp', 'bugs', 1, UTC_TIMESTAMP(), UTC_TIMESTAMP())";
+        $rc = qruqsp_core_dbInsert($qruqsp, $strsql, 'businesses');
+        if( $rc['stat'] != 'ok' ) {
+            qruqsp_core_dbTransactionRollback($qruqsp, 'core');
+            print_page('yes', $rc['err']['code'], "Failed to setup database<br/><br/>" . $rc['err']['msg']);
+            exit();
+        } 
+*/
+        //
+        // Enable modules
+        //
+        $strsql = "INSERT INTO qruqsp_core_station_modules (station_id, package, module, status, date_added, last_updated) "
+            . "VALUES ('1', 'qruqsp', 'arps', 1, UTC_TIMESTAMP(), UTC_TIMESTAMP())";
         $rc = qruqsp_core_dbInsert($qruqsp, $strsql, 'businesses');
         if( $rc['stat'] != 'ok' ) {
             qruqsp_core_dbTransactionRollback($qruqsp, 'core');

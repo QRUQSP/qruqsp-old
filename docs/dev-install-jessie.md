@@ -139,4 +139,11 @@ cd /qruqsp/sites/qruqsp.local
 cp run.ini.default run.ini
 ```
 
+Setup github.com username/password caching
+------------------------------------------
 
+Turn on the password caching for git so you don't have to enter your github username/password everytime you push.
+
+```
+git config --global credential.helper cache
+```

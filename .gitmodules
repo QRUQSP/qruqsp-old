@@ -19,3 +19,6 @@
 [submodule "site/qruqsp-mods/tnc"]
 	path = site/qruqsp-mods/tnc
 	url = https://github.com/qruqsp/tnc
+[submodule "site/qruqsp-mods/qrz"]
+	path = site/qruqsp-mods/qrz
+	url = https://github.com/qruqsp/qrz.git
